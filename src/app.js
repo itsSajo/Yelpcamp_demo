@@ -5,7 +5,8 @@ var
     mongoose     = require("mongoose"),
     Campground   = require("./models/campground"),
     Comment      = require("./models/comment"),
-    seedDB       = require("./seeds")
+    seedDB       = require("./seeds"),
+    del          = require('del')
 ;
 
 // cleaning DB
