@@ -79,6 +79,8 @@ router.put("/campgrounds/:id", isAuthor, function(req, res){
   })
 })
 
+// DESTROY CAMPGROUND ROUTE
+
 router.delete("/campgrounds/:id", isAuthor, function(req, res){
   Campground.findByIdAndRemove(req.params.id, function(err){
     if (err) {
@@ -89,7 +91,8 @@ router.delete("/campgrounds/:id", isAuthor, function(req, res){
   })
 })
 
-// DESTROY CAMPGROUND ROUTE
+
+// CUSTOM MIDDLEWARES
 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()){
@@ -118,8 +121,6 @@ function isAuthor(req, res, next) {
     res.redirect("back");
   }
 }
-
-
 
 
 module.exports = router;
