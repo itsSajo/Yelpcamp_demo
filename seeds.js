@@ -23,34 +23,33 @@ var data = [
 ]
 
 function seedDB() {
-  Campground.remove({}, function(err){
-    if(err){
-      console.log(err);
-    }
-    console.log("removed campgrounds!");
-    data.forEach(function(seed) {
-      Campground.create(seed, function(err, data){
+   Campground.remove({}, function(err){
+       if(err){
+         console.log(err);
+     }
+       console.log("removed campgrounds!");
+     data.forEach(function(seed) {
+       Campground.create(seed, function(err, data){
         if(err) {
-          console.log(err);
-        } else {
-          console.log("added a campground");
-          Comment.create({
-            text   : "Great place!",
-            author : "Homer"
-          }, function(err, comment) {
-            if (err) {
-              console.log(err);
-            } else {
-              data.comments.push(comment)
-              data.save();
-              console.log("Created new comment!");
+            console.log(err);
+           } else {
+            console.log("added a campground");
+            Comment.create({
+              text   : "Great place!",
+              author : "Homer"
+             }, function(err, comment) {
+               if (err) {
+                console.log(err);
+              } else {
+                 data.comments.push(comment)
+                data.save();
+                console.log("Created new comment!");
+              }
+            });
             }
-          });
-        }
-      })
-    });
-  });
-
+        });
+     });
+   });
 }
 
 module.exports = seedDB;
