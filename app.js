@@ -1,16 +1,22 @@
+// MODULES
 var
-    express       = require("express"),
-    app           = express(),
-    bodyParser    = require("body-parser"),
-    mongoose      = require("mongoose"),
-    passport      = require('passport'),
-    LocalStrategy = require('passport-local'),
-    Campground    = require("./models/campground"),
-    Comment       = require("./models/comment"),
-    User          = require("./models/user"),
-    seedDB        = require("./seeds")
+    express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    mongoose        = require("mongoose"),
+    passport        = require('passport'),
+    LocalStrategy   = require('passport-local'),
+    methodOverride  = require('method-override')
+;
+// MODELS
+var
+    Campground      = require("./models/campground"),
+    Comment         = require("./models/comment"),
+    User            = require("./models/user"),
+    seedDB          = require("./seeds")
 ;
 
+// ROUTES
 var
     commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
@@ -20,10 +26,11 @@ var
 mongoose.connect("mongodb://localhost/yelp_camp");
 
 // SETUP EXPRESS
-app.use(bodyParser.urlencoded({extended: true}))
-app.set("view engine", "ejs")
+app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs");
 // dirname returning abosulte path
-app.use(express.static(__dirname + "/public"))
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"))
 
 // cleaning DB
 // seedDB();
