@@ -54,6 +54,7 @@ passport.deserializeUser(User.deserializeUser());
 // MIDDLEWARE CLASS
 app.use(function(req, res, next){
   // template to be in every called route
+  // we can use CurrentUser as req.user 
   res.locals.currentUser = req.user;
   // moving to next middleware (example routeHandler)
   next();
