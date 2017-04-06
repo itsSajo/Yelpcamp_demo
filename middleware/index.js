@@ -9,6 +9,7 @@ var middlewareObject = {
     if(req.isAuthenticated()){
       return next();
     }
+    req.flash("error", "You need to logged in to do that!");
     res.redirect("/login");
   },
 
@@ -16,6 +17,7 @@ var middlewareObject = {
     if(req.isAuthenticated()) {
       Campground.findById(req.params.id, function(err, foundCampground){
         if(err) {
+          req.flash("error", "Campground not found");
           res.redirect("back")
         } else {
           // porownuje obiekt id z string id
@@ -23,11 +25,13 @@ var middlewareObject = {
           if(foundCampground.author.id.equals(req.user._id)) {
             next();
           } else {
+            req.flash("error", "Permission denied!");
             res.redirect("back")
           }
         }
       });
     } else {
+      req.flash("error", "You need to be logged in to do that!")
     // redirect to previous back
       res.redirect("back");
     }
@@ -37,6 +41,7 @@ var middlewareObject = {
     if(req.isAuthenticated()) {
       Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err) {
+          req.flash("error", "Comment not found");
           res.redirect("back")
         } else {
           // porownuje obiekt id z string id
@@ -44,11 +49,13 @@ var middlewareObject = {
           if(foundComment.author.id.equals(req.user._id)) {
             next();
           } else {
+            req.flash("error", "Permission denied!");
             res.redirect("back")
           }
         }
       });
     } else {
+      req.flash("error", "You need to logged in to do that!");
     // redirect to previous back
       res.redirect("back");
     }
