@@ -63,6 +63,7 @@ app.use(function(req, res, next){
   res.locals.success = req.flash("success");
   next();
 })
+app.locals.moment = require("moment");
 
 // using routes middleware
 app.use(authRoutes);
